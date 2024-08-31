@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+import plotly.express as px
 
 st.title("Chemical Analyzer App")
 
@@ -19,8 +19,5 @@ if uploaded_file is not None:
 
     # Plot the data (assuming it has 'Wavelength' and 'Absorbance' columns)
     st.write("Here is a plot of your data:")
-    fig, ax = plt.subplots()
-    ax.plot(data['Wavelength'], data['Absorbance'])
-    ax.set_xlabel('Wavelength')
-    ax.set_ylabel('Absorbance')
-    st.pyplot(fig)
+    fig = px.line(data, x='Wavelength', y='Absorbance', title='UV-Vis Spectrum')
+    st.plotly_chart(fig)
