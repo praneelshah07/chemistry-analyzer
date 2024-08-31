@@ -38,14 +38,14 @@ if uploaded_file is not None:
     peaks, _ = find_peaks(smooth_data, height=0.05, width=10)
 
     # Debugging: Output the peak indices and values
-    st.write(f"Peaks found at indices: {peaks}")
-    st.write(f"Peak wavenumbers: {data['Wavelength'].iloc[peaks].values}")
-    st.write(f"Peak absorbances: {smooth_data[peaks].values}")
+    st.write(f"Peaks found at indices: {peaks.tolist()}")
+    st.write(f"Peak wavenumbers: {data['Wavelength'].iloc[peaks].values.tolist()}")
+    st.write(f"Peak absorbances: {smooth_data[peaks].tolist()}")
 
     # Annotate peaks on the plot
     for peak in peaks:
-        fig_corrected.add_annotation(x=data['Wavelength'][peak], y=smooth_data[peak],
-                                     text=f"Peak @ {data['Wavelength'][peak]:.2f} cm⁻¹",
+        fig_corrected.add_annotation(x=data['Wavelength'].iloc[peak], y=smooth_data[peak],
+                                     text=f"Peak @ {data['Wavelength'].iloc[peak]:.2f} cm⁻¹",
                                      showarrow=True, arrowhead=1)
     st.plotly_chart(fig_corrected)
 
@@ -60,7 +60,7 @@ if uploaded_file is not None:
     # Check which peaks fall within these ranges
     identified_groups = []
     for peak in peaks:
-        wavenumber = data['Wavelength'][peak]
+        wavenumber = data['Wavelength'].iloc[peak]
         for group, (min_wavenumber, max_wavenumber) in functional_groups.items():
             if min_wavenumber <= wavenumber <= max_wavenumber:
                 identified_groups.append((wavenumber, group))
