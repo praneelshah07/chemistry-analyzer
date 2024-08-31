@@ -1,10 +1,17 @@
 import streamlit as st
+import pandas as pd
 
-st.title("Welcome to My Chemical Analyzer App")
+st.title("Chemical Analyzer App")
 
-st.write("This is a simple app for a mini project. Click the button below to visit the Streamlit community!")
+st.write("Upload your chemical data in CSV format to start analyzing.")
 
-if st.button('Go to Streamlit Community'):
-    st.write('Redirecting to the Streamlit Community...')
-    st.markdown('[Streamlit Community](https://discuss.streamlit.io)', unsafe_allow_html=True)
+# File uploader
+uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 
+if uploaded_file is not None:
+    # Read the CSV file
+    data = pd.read_csv(uploaded_file)
+
+    # Display the first few rows of the data
+    st.write("Here is a preview of your data:")
+    st.write(data.head())
