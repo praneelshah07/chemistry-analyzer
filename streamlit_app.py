@@ -17,7 +17,8 @@ if uploaded_file is not None:
     st.write("Here is a preview of your data:")
     st.write(data.head())
 
-    # Plot the data (assuming it has 'Wavelength' and 'Absorbance' columns)
-    st.write("Here is a plot of your data:")
-    fig = px.line(data, x='Wavelength', y='Absorbance', title='FTIR Spectrum')
+ # Plot the data (assuming it has 'Wavelength' and 'Absorbance' columns)
+    st.write("Here is a plot of your FTIR data:")
+    fig = px.line(data, x='Wavelength', y='Absorbance', title='FTIR Spectrum',
+                  labels={'Wavelength': 'Wavenumber (cm⁻¹)', 'Absorbance': 'Absorbance'})
     st.plotly_chart(fig)
