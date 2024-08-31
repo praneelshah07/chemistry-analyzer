@@ -19,5 +19,5 @@ if uploaded_file is not None:
 
     # Plot the data (assuming it has 'Wavelength' and 'Absorbance' columns)
     st.write("Here is a plot of your data:")
-    fig = px.line(data, x='Wavelength', y='Absorbance', title='UV-Vis Spectrum')
+    fig = px.line(data, x='Wavelength', y='Absorbance', title='FTIR Spectrum')
     st.plotly_chart(fig)
