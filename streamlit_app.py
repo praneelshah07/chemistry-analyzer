@@ -24,26 +24,27 @@ if uploaded_file is not None:
                   labels={'Wavelength': 'Wavenumber (cm⁻¹)', 'Absorbance': 'Absorbance'})
     st.plotly_chart(fig)
 
-    # Apply a Savitzky-Golay filter for baseline correction
+    # Apply a Savitzky-Golay filter for baseline correction and smoothing
     baseline_corrected = data['Absorbance'] - savgol_filter(data['Absorbance'], 51, 3)
+    smooth_data = savgol_filter(baseline_corrected, 101, 3)
 
-    # Plot the baseline-corrected data
-    st.write("Baseline-Corrected FTIR Spectrum:")
-    fig_corrected = px.line(x=data['Wavelength'], y=baseline_corrected, title='Baseline-Corrected FTIR Spectrum',
+    # Plot the baseline-corrected and smoothed data
+    st.write("Baseline-Corrected and Smoothed FTIR Spectrum:")
+    fig_corrected = px.line(x=data['Wavelength'], y=smooth_data, title='Baseline-Corrected FTIR Spectrum',
                             labels={'x': 'Wavenumber (cm⁻¹)', 'y': 'Absorbance'})
     st.plotly_chart(fig_corrected)
 
-    # Identify peaks in the baseline-corrected data
-    peaks, _ = find_peaks(baseline_corrected, height=0)
+    # Identify peaks in the smoothed data
+    peaks, _ = find_peaks(smooth_data, height=0.05, width=10)
 
     # Debugging: Output the peak indices and values
     st.write(f"Peaks found at indices: {peaks}")
     st.write(f"Peak wavenumbers: {data['Wavelength'].iloc[peaks].values}")
-    st.write(f"Peak absorbances: {baseline_corrected[peaks].values}")
+    st.write(f"Peak absorbances: {smooth_data[peaks].values}")
 
     # Annotate peaks on the plot
     for peak in peaks:
-        fig_corrected.add_annotation(x=data['Wavelength'][peak], y=baseline_corrected[peak],
+        fig_corrected.add_annotation(x=data['Wavelength'][peak], y=smooth_data[peak],
                                      text=f"Peak @ {data['Wavelength'][peak]:.2f} cm⁻¹",
                                      showarrow=True, arrowhead=1)
     st.plotly_chart(fig_corrected)
