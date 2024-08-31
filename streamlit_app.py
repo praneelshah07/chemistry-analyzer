@@ -40,11 +40,10 @@ if uploaded_file is not None:
     # Round the peak absorbances to 4 decimal places and convert to regular Python floats
     rounded_absorbances = [float(round(absorbance, 4)) for absorbance in smooth_data[peaks]]
 
-    # Debugging: Output the peak indices and values with reduced decimals
+    # Output the peak indices and values with reduced decimals
     st.write(f"Peaks found at indices: {peaks.tolist()}")
     st.write(f"Peak wavenumbers: {data['Wavelength'].iloc[peaks].values.tolist()}")
     st.write(f"Peak absorbances: {rounded_absorbances}")
-
 
     # Annotate peaks on the plot
     for peak in peaks:
@@ -61,18 +60,36 @@ if uploaded_file is not None:
         # Add more functional groups and ranges as needed
     }
 
-    # Check which peaks fall within these ranges
     identified_groups = []
     for peak in peaks:
         wavenumber = data['Wavelength'].iloc[peak]
         for group, (min_wavenumber, max_wavenumber) in functional_groups.items():
             if min_wavenumber <= wavenumber <= max_wavenumber:
-                identified_groups.append((wavenumber, group))
+                identified_groups.append(group)
 
     # Display identified functional groups
     if identified_groups:
         st.write("Identified Functional Groups:")
-        for wavenumber, group in identified_groups:
-            st.write(f"Peak @ {wavenumber:.2f} cm⁻¹: {group}")
+        for group in identified_groups:
+            st.write(f"{group}")
+
+        # Simple compound suggestion based on identified functional groups
+        compound_lookup = {
+            frozenset(["C=O stretch", "O-H stretch"]): "Carboxylic Acid",
+            frozenset(["C=O stretch", "C-H stretch"]): "Aldehyde or Ketone",
+            frozenset(["O-H stretch"]): "Alcohol or Phenol",
+            # Add more combinations as needed
+        }
+
+        matched_compound = None
+        for compound, groups in compound_lookup.items():
+            if frozenset(identified_groups) == groups:
+                matched_compound = compound
+                break
+
+        if matched_compound:
+            st.write(f"Likely compound: {matched_compound}")
+        else:
+            st.write("No matching compound found in the database.")
     else:
         st.write("No common functional groups identified.")
