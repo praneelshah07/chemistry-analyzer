@@ -37,10 +37,14 @@ if uploaded_file is not None:
     # Identify peaks in the smoothed data
     peaks, _ = find_peaks(smooth_data, height=0.05, width=10)
 
-    # Debugging: Output the peak indices and values
+    # Round the peak absorbances to 4 decimal places
+    rounded_absorbances = [round(absorbance, 4) for absorbance in smooth_data[peaks]]
+
+    # Debugging: Output the peak indices and values with reduced decimals
     st.write(f"Peaks found at indices: {peaks.tolist()}")
     st.write(f"Peak wavenumbers: {data['Wavelength'].iloc[peaks].values.tolist()}")
-    st.write(f"Peak absorbances: {smooth_data[peaks].tolist()}")
+    st.write(f"Peak absorbances: {rounded_absorbances}")
+
 
     # Annotate peaks on the plot
     for peak in peaks:
