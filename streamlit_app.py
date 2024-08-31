@@ -36,6 +36,11 @@ if uploaded_file is not None:
     # Identify peaks in the baseline-corrected data
     peaks, _ = find_peaks(baseline_corrected, height=0)
 
+    # Debugging: Output the peak indices and values
+    st.write(f"Peaks found at indices: {peaks}")
+    st.write(f"Peak wavenumbers: {data['Wavelength'].iloc[peaks].values}")
+    st.write(f"Peak absorbances: {baseline_corrected[peaks].values}")
+
     # Annotate peaks on the plot
     for peak in peaks:
         fig_corrected.add_annotation(x=data['Wavelength'][peak], y=baseline_corrected[peak],
