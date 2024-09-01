@@ -23,7 +23,7 @@ if uploaded_file is not None:
     st.plotly_chart(fig)
     # Apply a Savitzky-Golay filter for baseline correction and smoothing
     baseline_corrected = data['Absorbance'] - savgol_filter(data['Absorbance'], 51, 3)
-    smooth_data = savgol_filter(baseline_corrected, 201, 3)
+    smooth_data = savgol_filter(baseline_corrected, 151, 3)
     # Plot the baseline-corrected and smoothed data
     st.write("Baseline-Corrected and Smoothed FTIR Spectrum:")
     fig_corrected = px.line(x=data['Wavelength'], y=smooth_data, title='Baseline-Corrected FTIR Spectrum',
