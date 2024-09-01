@@ -109,13 +109,11 @@ if uploaded_file is not None:
                 # Add more combinations as needed
             }
 
-
-
     matched_compound = None
-        for compound, groups in compound_lookup.items():
-            if frozenset(identified_groups) == groups:
-                matched_compound = compound
-                break
+            for compound, groups in compound_lookup.items():
+                if frozenset(identified_groups) == groups:
+                    matched_compound = compound
+                    break
 
         if matched_compound:
             st.write(f"Likely compound: {matched_compound}")
