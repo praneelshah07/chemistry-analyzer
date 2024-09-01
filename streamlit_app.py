@@ -35,7 +35,7 @@ if uploaded_file is not None:
     st.plotly_chart(fig_corrected)
 
     # Identify peaks in the smoothed data
-    peaks, _ = find_peaks(smooth_data, height=0.075, width=10)
+    peaks, _ = find_peaks(smooth_data, height=0.1, width=10)
 
     # Round the peak absorbances to 4 decimal places and convert to regular Python floats
     rounded_absorbances = [float(round(absorbance, 4)) for absorbance in smooth_data[peaks]]
@@ -54,23 +54,31 @@ if uploaded_file is not None:
 
     # Functional group identification based on peak wavenumber
     functional_groups = {
-            "O-H stretch (alcohols)": (3200, 3600),
-            "N-H stretch (amines)": (3300, 3500),
-            "C=O stretch (carbonyl)": (1700, 1750),
-            "C-H stretch (alkanes)": (2850, 2960),
-            "C=C stretch (alkenes)": (1600, 1680),
-            "C≡C stretch (alkynes)": (2100, 2260),
-            "C-O stretch (alcohols, ethers)": (1050, 1150),
-            "N-O stretch (nitro compounds)": (1515, 1560),
-            "C≡N stretch (nitriles)": (2200, 2260),
-            "C-N stretch (amines)": (1180, 1360),
-            "S=O stretch (sulfones)": (1300, 1350),
-            "O-H bend (carboxylic acids)": (1410, 1440),
-            "P=O stretch (phosphates)": (1100, 1200),
-            "O-H stretch (carboxylic acids)": (2500, 3300),
-            "C-H bend (aromatics)": (700, 900),
-            # Add more functional groups and ranges as needed
-        }
+    # Existing mid-range groups
+    "O-H stretch (alcohols)": (3200, 3600),
+    "N-H stretch (amines)": (3300, 3500),
+    "C=O stretch (carbonyl)": (1700, 1750),
+    "C-H stretch (alkanes)": (2850, 2960),
+    "C=C stretch (alkenes)": (1600, 1680),
+    "C≡C stretch (alkynes)": (2100, 2260),
+    "C-O stretch (alcohols, ethers)": (1050, 1150),
+    "N-O stretch (nitro compounds)": (1515, 1560),
+    "C≡N stretch (nitriles)": (2200, 2260),
+    "C-N stretch (amines)": (1180, 1360),
+    "S=O stretch (sulfones)": (1300, 1350),
+    "O-H bend (carboxylic acids)": (1410, 1440),
+    "P=O stretch (phosphates)": (1100, 1200),
+    "O-H stretch (carboxylic acids)": (2500, 3300),
+    "C-H bend (aromatics)": (700, 900),
+    "C-I stretch (haloalkanes)": (485, 600),
+    "C-Br stretch (haloalkanes)": (500, 650),
+    "C-Cl stretch (haloalkanes)": (600, 800),  # Overlaps with mid-range
+    "Metal-O stretch (inorganics)": (200, 500),
+    "Ring deformation (aromatics)": (400, 600),
+    "C-H stretch (alkynes, terminal)": (3300, 3400),
+    "N-H stretch (amines, high range)": (3500, 3700),
+}
+
 
 
     identified_groups = []
@@ -82,7 +90,7 @@ if uploaded_file is not None:
 
     # Display identified functional groups
     if identified_groups:
-        st.write("Identified Functional Groups:")
+        st.write("Possible Identified Functional Groups:")
         for group in identified_groups:
             st.write(f"{group}")
 
