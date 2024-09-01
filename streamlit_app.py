@@ -14,6 +14,9 @@ if uploaded_file is not None:
     # Read the CSV file
     data = pd.read_csv(uploaded_file)
 
+    columns_to_display = ["Wavelength", "Absorbance"]
+    data = data[columns_to_display]
+
     # Display the first few rows of the data
     st.write("Here is a preview of your data:")
     st.write(data.head())
