@@ -54,11 +54,24 @@ if uploaded_file is not None:
 
     # Functional group identification based on peak wavenumber
     functional_groups = {
-        "O-H stretch": (3200, 3600),
-        "C=O stretch": (1700, 1750),
-        "C-H stretch": (2850, 2960),
-        # Add more functional groups and ranges as needed
-    }
+            "O-H stretch (alcohols)": (3200, 3600),
+            "N-H stretch (amines)": (3300, 3500),
+            "C=O stretch (carbonyl)": (1700, 1750),
+            "C-H stretch (alkanes)": (2850, 2960),
+            "C=C stretch (alkenes)": (1600, 1680),
+            "C≡C stretch (alkynes)": (2100, 2260),
+            "C-O stretch (alcohols, ethers)": (1050, 1150),
+            "N-O stretch (nitro compounds)": (1515, 1560),
+            "C≡N stretch (nitriles)": (2200, 2260),
+            "C-N stretch (amines)": (1180, 1360),
+            "S=O stretch (sulfones)": (1300, 1350),
+            "O-H bend (carboxylic acids)": (1410, 1440),
+            "P=O stretch (phosphates)": (1100, 1200),
+            "O-H stretch (carboxylic acids)": (2500, 3300),
+            "C-H bend (aromatics)": (700, 900),
+            # Add more functional groups and ranges as needed
+        }
+
 
     identified_groups = []
     for peak in peaks:
