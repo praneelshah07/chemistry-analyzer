@@ -35,7 +35,7 @@ if uploaded_file is not None:
     st.plotly_chart(fig_corrected)
 
     # Identify peaks in the smoothed data
-    peaks, _ = find_peaks(smooth_data, height=0.1, width=10)
+    peaks, _ = find_peaks(smooth_data, height=0.05, width=10)
 
     # Round the peak absorbances to 4 decimal places and convert to regular Python floats
     rounded_absorbances = [float(round(absorbance, 4)) for absorbance in smooth_data[peaks]]
