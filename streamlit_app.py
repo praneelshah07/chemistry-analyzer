@@ -111,7 +111,7 @@ if uploaded_file is not None:
 
 
 
-        matched_compound = None
+    matched_compound = None
         for compound, groups in compound_lookup.items():
             if frozenset(identified_groups) == groups:
                 matched_compound = compound
