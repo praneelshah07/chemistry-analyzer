@@ -30,7 +30,7 @@ if uploaded_file is not None:
                             labels={'x': 'Wavenumber (cm⁻¹)', 'y': 'Absorbance'})
     st.plotly_chart(fig_corrected)
     # Identify peaks in the smoothed data
-    peaks, _ = find_peaks(smooth_data, height=0.05, width=10)
+    peaks, _ = find_peaks(smooth_data, height=0.06, width=10)
     # Round the peak absorbances to 4 decimal places and convert to regular Python floats
     rounded_absorbances = [float(round(absorbance, 4)) for absorbance in smooth_data[peaks]]
     # Output the peak indices and values with reduced decimals
