@@ -99,27 +99,16 @@ if uploaded_file is not None:
 
     # Expanded compound suggestion based on identified functional groups
     compound_lookup = {
-        frozenset(["C=O stretch (carbonyl)", "O-H stretch (alcohols)"]): "Carboxylic Acid (e.g., Acetic Acid)",
-        frozenset(["C=O stretch (carbonyl)", "C-H stretch (alkanes)"]): "Aldehyde (e.g., Formaldehyde) or Ketone (e.g., Acetone)",
-        frozenset(["O-H stretch (alcohols)"]): "Alcohol (e.g., Ethanol) or Phenol",
-        frozenset(["N-H stretch (amines)"]): "Primary or Secondary Amine (e.g., Aniline)",
-        frozenset(["C=C stretch (alkenes)", "C-H stretch (alkanes)"]): "Alkene (e.g., Ethylene)",
-        frozenset(["C≡C stretch (alkynes)", "C-H stretch (alkynes)"]): "Alkyne (e.g., Acetylene)",
-        frozenset(["C-O-C stretch (ethers)", "C-H stretch (alkanes)"]): "Ether (e.g., Diethyl Ether)",
-        frozenset(["C≡N stretch (nitriles)", "C-H stretch (alkanes)"]): "Nitrile (e.g., Acetonitrile)",
-        frozenset(["S=O stretch (sulfones)", "C-H stretch (alkanes)"]): "Sulfone (e.g., Sulfolane) or Sulfoxide",
-        frozenset(["C-H out-of-plane bend (aromatics)", "C-H bend (aromatics)"]): "Aromatic Compound (e.g., Benzene)",
-        frozenset(["P=O stretch (phosphates)", "O-H bend (carboxylic acids)"]): "Phosphate Ester",
-        frozenset(["C-I stretch (haloalkanes)", "C-H stretch (alkanes)"]): "Haloalkane (e.g., Iodoform)",
-        frozenset(["C-Br stretch (haloalkanes)", "C-H stretch (alkanes)"]): "Haloalkane (e.g., Bromoform)",
-        frozenset(["Si-O stretch (silicates, silicones)", "C-H stretch (alkanes)"]): "Silicone (e.g., Polydimethylsiloxane)",
-        frozenset(["O-H stretch (carboxylic acids)", "C=O stretch (carbonyl)"]): "Carboxylic Acid (e.g., Acetic Acid)",
-        frozenset(["O-H stretch (carboxylic acids)", "C-O stretch (alcohols, ethers)"]): "Carboxylic Acid",
-        frozenset(["N-H stretch (amines, high range)", "C=O stretch (carbonyl)"]): "Amide (e.g., Acetamide)",
-        frozenset(["C=C-H out-of-plane bend (alkenes)", "C=C stretch (alkenes)"]): "Alkene (e.g., Butene)",
-        frozenset(["C=O stretch (carbonyl)", "C-O stretch (alcohols, ethers)"]): "Ester (e.g., Ethyl Acetate)",
-        frozenset(["C-Cl stretch (haloalkanes)", "C-H stretch (alkanes)"]): "Haloalkane (e.g., Chloroform)",
-    }
+                frozenset(["C=O stretch (carbonyl)", "O-H stretch (alcohols)"]): "Carboxylic Acid",
+                frozenset(["C=O stretch (carbonyl)", "C-H stretch (alkanes)"]): "Aldehyde or Ketone",
+                frozenset(["O-H stretch (alcohols)"]): "Alcohol or Phenol",
+                frozenset(["N-H stretch (amines)"]): "Amine",
+                frozenset(["C=C stretch (alkenes)"]): "Alkene",
+                frozenset(["C≡C stretch (alkynes)"]): "Alkyne",
+                frozenset(["C≡N stretch (nitriles)"]): "Nitrile",
+                # Add more combinations as needed
+            }
+
 
 
         matched_compound = None
